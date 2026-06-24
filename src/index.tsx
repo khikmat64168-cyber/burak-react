@@ -1,19 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
-import App from "./app/App";
-import reportWebVitals from "./reportWebVitals";
-import "./css/index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import App from './app/App';
+import reportWebVitals from './reportWebVitals';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import './css/index.css';
+import theme from './theme';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
+//boilerplate ishlashi  redax toolkit // real dom va virtual dom
+//Material UI da 3 ta asosiy element : Container.  ,   Stack     ,    Box. U emotion enginedan foydalanadi
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
