@@ -12,7 +12,7 @@
  * ──────────────────────────────────────────────────────────────────
  */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './app/App';
@@ -23,6 +23,8 @@ import './css/index.css';
 import theme from './app/MaterialTheme';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+const container = document.getElementById('root')!;
+const root = createRoot(container);
 /**
  * ─── KOD TAHLILI ──────────────────────────────────────────────────
  * ReactDOM.render() — Virtual DOMdagi komponent daraxtini haqiqiy
@@ -46,7 +48,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
  * <div id="root"> elementini topib, React daraxtini shu joyga ulaydi.
  * ──────────────────────────────────────────────────────────────────
  */
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
@@ -57,7 +59,6 @@ ReactDOM.render(
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
 //boilerplate ishlashi  redax toolkit // real dom va virtual dom
 //Material UI da 3 ta asosiy element : Container.  ,   Stack     ,    Box. U emotion enginedan foydalanadi
