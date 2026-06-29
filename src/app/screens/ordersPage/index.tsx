@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
 
-export function OrdersPage() {
-  return <Container>OrdersPage</Container>;
+export default function OrdersPage(): JSX.Element {
+  return <Container>OrdersPage </Container>;
 }
