@@ -47,3 +47,43 @@
   line-height: 30px;
   color: #d7b686;
 }
+
+/** POPULAR DISHES **/
+
+.home-page .popular-dishes-frame {
+  width: 100%;
+  height: 580px;
+  display: flex;
+  background: #f8f8f8;
+}
+
+.home-page .popular-dishes-frame .popular-section {
+  margin-top: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-page .popular-dishes-frame .popular-section .category-title {
+  text-align: center;
+  font-family: 'Robbo Serif';
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.44px;
+  color: #000;
+}
+
+.home-page .popular-dishes-frame .popular-section .cards-frame {
+  width: 100%;
+  margin-top: 43px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.home-page .popular-dishes-frame .popular-section .cards-frame .card-cover {
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0) 200px),
+    linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 300px);
+}
