@@ -1,15 +1,15 @@
 import React from 'react';
-import {
-  Box,
-  Card,
-  CardMedia,
-  Container,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
+import { CssVarsProvider } from '@mui/joy/styles';
+import Card from '@mui/joy/Card';
+import CardCover from '@mui/joy/CardCover';
+import CardContent from '@mui/joy/CardContent';
+import CardOverflow from '@mui/joy/CardOverflow';
+import Typography from '@mui/joy/Typography';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
+// Mashhur taomlar ro'yxati
 const list = [
   { productName: 'Lavash', imagePath: '/img/lavash.webp' },
   { productName: 'Cutlet', imagePath: '/img/cutlet.webp' },
@@ -23,94 +23,83 @@ export default function PopularDishes() {
       <Container>
         <Stack className="popular-section">
           <Box className="category-title">Popular Dishes</Box>
-          <Stack className="cards-frame" direction={'row'} sx={{ gap: 2 }}>
-            {list.map((ele, index) => {
-              return (
-                <Card
-                  key={index}
-                  className="card"
-                  sx={{
-                    position: 'relative',
-                    overflow: 'hidden',
-                    height: '360px',
-                    flex: 1,
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    image={ele.imagePath}
-                    alt={ele.productName}
-                    sx={{ height: '100%', width: '100%', objectFit: 'cover' }}
-                  />
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      inset: 0,
-                      background:
-                        'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)',
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      bottom: 0,
-                      width: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                    }}
-                  >
-                    <Stack
-                      sx={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        px: 2,
-                        pb: 1,
-                      }}
-                    >
-                      <Typography variant="h6" sx={{ color: '#fff' }}>
-                        {ele.productName}
-                      </Typography>
-                      <Typography
+
+          {/* CssVarsProvider — Joy UI komponentlari uchun, bir marta tashqarida o'raladi */}
+          <CssVarsProvider>
+            {/* list bo'sh emas → kartochkalar ko'rinadi | bo'sh → "no-data" xabari */}
+            {list.length !== 0 ? (
+              <Stack className="cards-frame" direction={'row'} sx={{ gap: 2 }}>
+                {list.map((ele, index) => {
+                  return (
+                    <Card key={index} className="card" sx={{ flex: 1, height: '360px' }}>
+                      {/* CardCover — rasm to'liq kartani qoplaydi */}
+                      <CardCover>
+                        <img src={ele.imagePath} alt={ele.productName} />
+                      </CardCover>
+
+                      {/* Ikkinchi CardCover — gradient overlay (CSS da belgilangan) */}
+                      <CardCover className="card-cover" />
+
+                      {/* Taom nomi va ko'rishlar soni — pastki qismda */}
+                      <CardContent sx={{ justifyContent: 'flex-end' }}>
+                        <Stack
+                          sx={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          {/* level="h2" fontSize="lg" — Joy UI Typography ning o'z proplari */}
+                          <Typography
+                            level="h2"
+                            fontSize="lg"
+                            textColor="#fff"
+                            mb={1}
+                          >
+                            {ele.productName}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontWeight: 'md',
+                              color: 'neutral.300',
+                              alignItems: 'center',
+                              display: 'flex',
+                            }}
+                          >
+                            20{' '}
+                            <VisibilityIcon
+                              sx={{ fontSize: 25, marginLeft: '5px' }}
+                            />
+                          </Typography>
+                        </Stack>
+                      </CardContent>
+
+                      {/* CardOverflow — karta pastidan chiqadigan tavsif qatori */}
+                      <CardOverflow
                         sx={{
-                          color: '#fff',
                           display: 'flex',
-                          alignItems: 'center',
-                          gap: '5px',
+                          gap: 1.5,
+                          py: 1.5,
+                          px: 'var(--Card-padding)',
+                          borderTop: '1px solid',
+                          height: '60px',
                         }}
                       >
-                        20
-                        <VisibilityIcon sx={{ fontSize: 22 }} />
-                      </Typography>
-                    </Stack>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        gap: 1,
-                        py: 1.5,
-                        px: 2,
-                        borderTop: '1px solid rgba(255,255,255,0.2)',
-                        height: '50px',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          color: '#fff',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 0.5,
-                          fontSize: 14,
-                        }}
-                      >
-                        <DescriptionOutlinedIcon sx={{ fontSize: 18 }} /> This is delicious meal
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Card>
-              );
-            })}
-          </Stack>
+                        {/* startDecorator — matndan oldin ikonka qo'yadi (Joy UI xususiyati) */}
+                        <Typography
+                          startDecorator={<DescriptionOutlinedIcon />}
+                          textColor="neutral.300"
+                        >
+                          This is delicious meal
+                        </Typography>
+                      </CardOverflow>
+                    </Card>
+                  );
+                })}
+              </Stack>
+            ) : (
+              <Box className="no-data">Popular dishes are not available</Box>
+            )}
+          </CssVarsProvider>
         </Stack>
       </Container>
     </div>
