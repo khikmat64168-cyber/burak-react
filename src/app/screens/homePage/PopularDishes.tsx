@@ -31,7 +31,11 @@ export default function PopularDishes() {
               <Stack className="cards-frame" direction={'row'} sx={{ gap: 2 }}>
                 {list.map((ele, index) => {
                   return (
-                    <Card key={index} className="card" sx={{ flex: 1, height: '360px' }}>
+                    <Card
+                      key={index}
+                      className="card"
+                      sx={{ flex: 1, height: '360px' }}
+                    >
                       {/* CardCover — rasm to'liq kartani qoplaydi */}
                       <CardCover>
                         <img src={ele.imagePath} alt={ele.productName} />
