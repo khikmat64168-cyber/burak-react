@@ -56,7 +56,9 @@ export default function NewDishes() {
                           <Stack>
                             <Typography className={'views'}>
                               20
-                              <VisibilityIcon sx={{ fontSize: 20, marginLeft: '5px' }} />
+                              <VisibilityIcon
+                                sx={{ fontSize: 20, marginLeft: '5px' }}
+                              />
                             </Typography>
                           </Stack>
                         </Stack>
