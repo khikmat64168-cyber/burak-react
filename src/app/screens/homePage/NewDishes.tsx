@@ -1,63 +1,65 @@
-import React from 'react';
-import { Box, Container, Stack } from '@mui/material';
-import { CssVarsProvider } from '@mui/joy/styles';
-import Card from '@mui/joy/Card';
-import CardOverflow from '@mui/joy/CardOverflow';
-import AspectRatio from '@mui/joy/AspectRatio';
-import Typography from '@mui/joy/Typography';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-// To'g'ri yo'l: components/divider emas, components/headers
-import Divider from '../../components/headers';
+import React from "react";
+import { Box, Container, Stack } from "@mui/material";
+import AspectRatio from "@mui/joy/AspectRatio";
+import Card from "@mui/joy/Card";
+import CardOverflow from "@mui/joy/CardOverflow";
+import Typography from "@mui/joy/Typography";
+import { CssVarsProvider } from "@mui/joy/styles";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import Divider from "../../components/divider";
 
-// Yangi taomlar ro'yxati
 const newDishes = [
-  { productName: 'Cutlet', imagePath: '/img/cutlet.webp' },
-  { productName: 'Kebab', imagePath: '/img/kebab-fresh.webp' },
-  { productName: 'Kebab', imagePath: '/img/kebab.webp' },
-  { productName: 'Lavash', imagePath: '/img/lavash.webp' },
+  { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
+  { productName: "Kebab", imagePath: "/img/kebab-fresh.webp" },
+  { productName: "Kebab", imagePath: "/img/kebab.webp" },
+  { productName: "Lavash", imagePath: "/img/lavash.webp" },
 ];
 
 export default function NewDishes() {
-  return (
-    <div className="new-products-frame">
-      <Container>
-        <Stack className={'main'}>
-          <Box className={'category-title'}>Fresh Menu</Box>
+  console.log("newDishes:", newDishes);
 
-          {/* CssVarsProvider — Joy UI komponentlari uchun bir marta, tashqarida */}
-          <CssVarsProvider>
-            {/* newDishes bo'sh emas → kartochkalar | bo'sh → "no-data" xabari */}
-            {newDishes.length !== 0 ? (
-              <Stack className={'cards-frame'} direction={'row'}>
-                {newDishes.map((ele, index) => {
+  return (
+    <div className={"new-products-frame"}>
+      <Container>
+        <Stack className={"main"}>
+          <Box className={"category-title"}>Fresh Menu</Box>
+          <Stack className={"cards-frame"}>
+            <CssVarsProvider>
+              {newDishes.length !== 0 ? (
+                newDishes.map((ele, index) => {
                   return (
-                    <Card key={index} variant="outlined" className={'card'}>
-                      {/* Rasm — AspectRatio 1:1 nisbatda kvadrat ko'rsatadi */}
+                    <Card key={index} variant="outlined" className={"card"}>
                       <CardOverflow>
                         <div className="product-sale">Normal size</div>
                         <AspectRatio ratio="1">
-                          <img src={ele.imagePath} alt={ele.productName} />
+                          <img src={ele.imagePath} alt="" />
                         </AspectRatio>
                       </CardOverflow>
 
-                      {/* Taom nomi, narxi va ko'rishlar soni */}
                       <CardOverflow variant="soft" className="product-detail">
                         <Stack className="info">
-                          {/* direction={'row'} — nomi va narxi yonma-yon */}
-                          <Stack direction={'row'}>
-                            <Typography className={'title'}>
+                          <Stack flexDirection={"row"}>
+                            <Typography
+                              className={"title"}
+                              sx={{
+                                display: "block",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                whiteSpace: "nowrap",
+                                marginRight: "10px",
+                              }}
+                              noWrap
+                            >
                               {ele.productName}
                             </Typography>
-                            {/* Ajratuvchi vertikal chiziq */}
                             <Divider width="2" height="24" bg="#d9d9d9" />
-                            <Typography className={'price'}>$12</Typography>
+                            <Typography className={"price"}>$12</Typography>
                           </Stack>
-
                           <Stack>
-                            <Typography className={'views'}>
+                            <Typography className={"views"}>
                               20
                               <VisibilityIcon
-                                sx={{ fontSize: 20, marginLeft: '5px' }}
+                                sx={{ fontSize: 20, marginLeft: "5px" }}
                               />
                             </Typography>
                           </Stack>
@@ -65,12 +67,12 @@ export default function NewDishes() {
                       </CardOverflow>
                     </Card>
                   );
-                })}
-              </Stack>
-            ) : (
-              <Box className="no-data">New products are not available</Box>
-            )}
-          </CssVarsProvider>
+                })
+              ) : (
+                <Box className="no-data">New products are not available!</Box>
+              )}
+            </CssVarsProvider>
+          </Stack>
         </Stack>
       </Container>
     </div>
