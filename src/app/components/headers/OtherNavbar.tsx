@@ -1,6 +1,6 @@
-import { Box, Button, Container, Stack } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import Basket from "./Basket";
+import { Box, Button, Container, Stack } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import Basket from './Basket';
 
 export default function OtherNavbar() {
   const authMember = null;
@@ -15,30 +15,32 @@ export default function OtherNavbar() {
             </NavLink>
           </Box>
           <Stack className="links">
-            <Box className={"hover-line"}>
+            <Box className={'hover-line'}>
               <NavLink to="/">Home</NavLink>
             </Box>
-            <Box className={"hover-line"}>
-              <NavLink to="/products" activeClassName={"underline"}>
+            <Box className={'hover-line'}>
+              <NavLink to="/products" activeClassName={'underline'}>
                 Products
               </NavLink>
             </Box>
             {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/orders" activeClassName={"underline"}>
+              <Box className={'hover-line'}>
+                <NavLink to="/orders" activeClassName={'underline'}>
                   Orders
                 </NavLink>
               </Box>
-            ) : null}
+            ) : (
+              true
+            )}
             {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/member-page" activeClassName={"underline"}>
+              <Box className={'hover-line'}>
+                <NavLink to="/member-page" activeClassName={'underline'}>
                   My Page
                 </NavLink>
               </Box>
             ) : null}
-            <Box className={"hover-line"}>
-              <NavLink to="/help" activeClassName={"underline"}>
+            <Box className={'hover-line'}>
+              <NavLink to="/help" activeClassName={'underline'}>
                 Help
               </NavLink>
             </Box>
@@ -53,8 +55,8 @@ export default function OtherNavbar() {
             ) : (
               <img
                 className="user-avatar"
-                src={"/icons/default-user.svg"}
-                aria-haspopup={"true"}
+                src={'/icons/default-user.svg'}
+                aria-haspopup={'true'}
               />
             )}
           </Stack>
