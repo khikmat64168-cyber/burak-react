@@ -47,7 +47,7 @@ export default function UserPage() {
                 <TelegramIcon />
                 <YouTubeIcon />
               </Box>
-              <p className={"user-desc"}>no description</p>
+              <p className={"user-desc"}>No description</p>
             </Box>
           </Stack>
         </Stack>

@@ -50,11 +50,13 @@ export default function OrdersPage() {
                 <img
                   src={'/icons/default-user.svg'}
                   className={'order-user-avatar'}
+                  alt="user avatar"
                 />
                 <div className={'order-user-icon-box'}>
                   <img
                     src={'/icons/user-badge.svg'}
                     className={'order-user-prof-img'}
+                    alt="user badge"
                   />
                 </div>
               </div>
@@ -103,10 +105,10 @@ export default function OrdersPage() {
               className={'card-input'}
             />
             <div className={'cards-box'}>
-              <img src={'/icons/western-card.svg'} />
-              <img src={'/icons/master-card.svg'} />
-              <img src={'/icons/paypal-card.svg'} />
-              <img src={'/icons/visa-card.svg'} />
+              <img src={'/icons/western-card.svg'} alt="western card" />
+              <img src={'/icons/master-card.svg'} alt="master card" />
+              <img src={'/icons/paypal-card.svg'} alt="paypal" />
+              <img src={'/icons/visa-card.svg'} alt="visa" />
             </div>
           </Box>
         </Stack>
