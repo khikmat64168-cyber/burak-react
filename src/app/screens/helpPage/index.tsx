@@ -17,7 +17,6 @@ export default function HelpPage() {
   const [value, setValue] = React.useState("1");
 
   /** HANDLERS **/
-  
   const handleChange = (e: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
