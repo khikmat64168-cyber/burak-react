@@ -39,7 +39,7 @@
 .products-page .products .top-text p {
   position: relative;
   margin-left: 380px;
-  font-family: "Dancing Script";
+  font-family: 'Dancing Script';
   font-style: normal;
   font-weight: 700;
   font-size: 36px;
@@ -80,7 +80,7 @@
   display: flex;
   border: none;
   border-radius: 10px 0px 0px 10px;
-  font-family: "GT Walsheim Pro";
+  font-family: 'GT Walsheim Pro';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -134,7 +134,7 @@
 
 .products-page .products .restaurant-avatars span {
   margin-top: 14px;
-  font-family: "Solway";
+  font-family: 'Solway';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -157,7 +157,7 @@
   justify-content: center;
   align-items: center;
   text-transform: capitalize;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-size: 30px;
@@ -193,7 +193,7 @@
   background: #ff9200;
   box-shadow: 4px 6px 20px #0000001a;
   border-radius: 25px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -211,7 +211,7 @@
 
 .products-page .products .product-desc .product-title {
   margin-top: 10px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -220,7 +220,7 @@
 
 .products-page .products .product-desc .product-desc {
   margin-top: 2px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -234,7 +234,7 @@
 
 .products-page .products .product-img:before {
   border-radius: 0px 50px 0px 0px;
-  content: "";
+  content: '';
   opacity: 0;
   transition: opacity 0.5s ease;
   position: absolute;
@@ -276,7 +276,7 @@
   background: rgb(198 0 255 / 66%);
   border: 2px solid #d7b686;
   border-radius: 10px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 10px;
@@ -342,7 +342,7 @@
 }
 
 .products-page .products .brands-logo .category-title {
-  font-family: "Dancing Script";
+  font-family: 'Dancing Script';
   font-style: normal;
   font-weight: 700;
   font-size: 36px;
@@ -373,7 +373,7 @@
 
 .products-page .products .brands-logo .review-name {
   margin-top: 10px;
-  font-family: "Commissioner";
+  font-family: 'Commissioner';
   font-style: normal;
   font-weight: 500;
   font-size: 30px;
@@ -392,7 +392,7 @@
 }
 
 .products-page .products .brands-logo .review-prof {
-  font-family: "Commissioner";
+  font-family: 'Commissioner';
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -402,7 +402,7 @@
 
 .products-page .products .brands-logo .review-desc {
   margin-top: 10px;
-  font-family: "DM Sans";
+  font-family: 'DM Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -434,7 +434,7 @@
 }
 
 .products-page .products .address .title {
-  font-family: "Dancing Script";
+  font-family: 'Dancing Script';
   font-style: normal;
   font-weight: 700;
   font-size: 36px;
@@ -452,7 +452,7 @@
 }
 
 .products-page .products .about-left-desc span {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
@@ -471,7 +471,7 @@
 
 .products-page .products .about-left-desc p {
   margin-top: 10px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -486,7 +486,7 @@
   top: 3653px;
   display: flex;
   border-radius: 0px 50px 0px 0px;
-  background: url("https://i0.wp.com/educationplanetonline.com/wp-content/uploads/2022/03/Culinary-Schools-in-Europe-1.jpg");
+  background: url('https://i0.wp.com/educationplanetonline.com/wp-content/uploads/2022/03/Culinary-Schools-in-Europe-1.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -500,7 +500,7 @@
 }
 
 .products-page .products .about-right-desc span {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -510,7 +510,7 @@
 
 .products-page .products .about-right-desc p {
   margin-top: 10px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -604,7 +604,8 @@
   width: 48%;
   height: 480px;
   background: #ffffff;
-  box-shadow: 9px 13px 14px 5px rgba(0, 0, 0, 0.25),
+  box-shadow:
+    9px 13px 14px 5px rgba(0, 0, 0, 0.25),
     inset -1px 2px 10px 3px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
   overflow: hidden;
@@ -632,7 +633,8 @@
   height: 480px;
   display: flex;
   background: #ffffff;
-  box-shadow: 9px 13px 14px 5px rgba(0, 0, 0, 0.25),
+  box-shadow:
+    9px 13px 14px 5px rgba(0, 0, 0, 0.25),
     inset -1px 2px 10px 3px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
 }
@@ -645,7 +647,7 @@
 }
 
 .products-page .chosen-product .info-box .product-name {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 30px;
@@ -655,7 +657,7 @@
 
 .products-page .chosen-product .info-box .resto-name {
   margin-top: 16px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 17px;
@@ -698,7 +700,7 @@
   height: 112px;
   margin-top: 30px;
   margin-bottom: 30px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -718,7 +720,7 @@
 }
 
 .products-page .chosen-product .product-price span {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 25px;
@@ -737,7 +739,7 @@
 .products-page .chosen-product .button-box button {
   width: 230px;
   height: 44px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
@@ -746,7 +748,7 @@
 }
 
 .products-page .chosen-product .title {
-  font-family: "Dancing Script";
+  font-family: 'Dancing Script';
   font-style: normal;
   font-weight: 700;
   font-size: 36px;

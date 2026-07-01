@@ -106,6 +106,7 @@ export default function Products() {
                         <Button className={"shop-btn"}>
                           <img
                             src={"/icons/shopping-cart.svg"}
+                            alt="shopping cart"
                             style={{ display: "flex" }}
                           />
                         </Button>
@@ -161,16 +162,16 @@ export default function Products() {
           <Box className={"category-title"}>Our Family Brands</Box>
           <Stack className={"brand-list"}>
             <Box className={"review-box"}>
-              <img src={"/img/gurme.png"} />
+              <img src={"/img/gurme.png"} alt="gurme" />
             </Box>
             <Box className={"review-box"}>
-              <img src={"/img/seafood.png"} />
+              <img src={"/img/seafood.png"} alt="seafood" />
             </Box>
             <Box className={"review-box"}>
-              <img src={"/img/doner.png"} />
+              <img src={"/img/doner.png"} alt="doner" />
             </Box>
             <Box className={"review-box"}>
-              <img src={"/img/sweets.png"} />
+              <img src={"/img/sweets.png"} alt="sweets" />
             </Box>
           </Stack>
         </Container>
