@@ -33,9 +33,9 @@ function App() {
           <HelpPage />
         </Route>
         <Route path="/">
-          <Test1 />
+          {/* <Test1 /> */}
 
-          {/* <HomePage /> */}
+          <HomePage />
         </Route>
       </Switch>
       <Footer />
