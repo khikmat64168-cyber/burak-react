@@ -12,6 +12,7 @@ export default function HomeNavbar() {
   useEffect(() => {
     console.log('componentDidiMount');
     setCount(count + 1);
+    console.log('componentUpdate');
 
     return () => {
       console.log('componentWillUnmount');

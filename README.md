@@ -55,4 +55,4 @@ reduxda controller o'rnida reducer amal bajaradi
 
 debugging farqi
 
-redux toolkit --
+redux toolkit -- avfzalliklari
