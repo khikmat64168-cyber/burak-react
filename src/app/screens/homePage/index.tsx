@@ -29,6 +29,8 @@ const popularDishRetriever = createSelector(
 export default function HomePage() {
   const { setPopularDishes } = actionDispatch(useDispatch());
   const { popularDishes } = useSelector(popularDishRetriever);
+
+  console.log(process.env.REACT_APP_API_URL);
   // Selector : Store => Data
   useEffect(() => {
     // Backend server data request => Data
@@ -59,6 +61,8 @@ export default function HomePage() {
 
     setPopularDishes(result);
   }, []);
+
+  console.log('popularDishes:', popularDishes);
   return (
     <div className={'homepage'}>
       <Statistics />
