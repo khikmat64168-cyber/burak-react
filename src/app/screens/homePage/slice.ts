@@ -17,13 +17,13 @@ const homePageSlice = createSlice({
     setNewDishes: (state, action) => {
       state.newDishes = action.payload;
     },
-    settopUsers: (state, action) => {
+    setTopUsers: (state, action) => {
       state.topUsers = action.payload;
     },
   },
 });
 
-export const { setPopularDishes, setNewDishes, settopUsers } =
+export const { setPopularDishes, setNewDishes, setTopUsers } =
   homePageSlice.actions;
 
 const HomePageReducor = homePageSlice.reducer;
