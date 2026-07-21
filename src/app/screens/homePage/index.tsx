@@ -14,6 +14,8 @@ import { setPopularDishes } from './slice';
 import { retrievePopularDishes } from './selector';
 import { Product } from '../../../lib/types/product';
 import { create } from 'domain';
+import ProductService from '../../services/ProductService';
+import { ProductCollection } from '../../../lib/enums/product.enum';
 
 /** REDUX SLICE & SELECTOR */
 
@@ -21,48 +23,33 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
 });
 
-const popularDishRetriever = createSelector(
-  retrievePopularDishes,
-  (popularDishes) => ({ popularDishes }),
-);
-
 export default function HomePage() {
   const { setPopularDishes } = actionDispatch(useDispatch());
-  const { popularDishes } = useSelector(popularDishRetriever);
 
   console.log(process.env.REACT_APP_API_URL);
   // Selector : Store => Data
   useEffect(() => {
     // Backend server data request => Data
-    const result = [
-      {
-        _id: '6a39b1be62f1c50577e78170',
-        productStatus: 'PROCESS',
-        productCollection: 'DISH',
-        productName: 'Kebab',
-        productPrice: 14,
-        productLeftCount: 75,
-        productSize: 'NORMAL',
-        productVolume: 1,
-        productDesc: 'This is delicious kebab',
-        productImages: [
-          'uploads/products/b25d78ff-14da-4a97-a761-b2c7cf6457f7.jpg',
-          'uploads/products/6eb6d2ad-3fab-4b32-bfaa-078392b30f33.jpeg',
-          'uploads/products/4eb012c4-2d39-4506-bc2e-6b7a630c09fd.jpeg',
-        ],
-        productViews: 0,
-        createdAt: '2026-06-22T22:05:50.795Z',
-        updatedAt: '2026-06-22T22:05:50.795Z',
-        __v: 0,
-      },
-    ];
+    const product = new ProductService();
+    product
+      .getProducts({
+        page: 1,
+        limit: 4,
+        order: 'productViews',
+        productCollection: ProductCollection.DISH,
+      })
+      .then((data) => {
+        console.log('data passed here:', data);
+        setPopularDishes(data);
+      })
+      .catch((err) => console.log(err));
+
     //slice : backenddan kelgan Data => store
     //@ts-ignore
 
-    setPopularDishes(result);
+    // setPopularDishes(result);
   }, []);
 
-  console.log('popularDishes:', popularDishes);
   return (
     <div className={'homepage'}>
       <Statistics />
