@@ -44,11 +44,11 @@ export default function PopularDishes() {
           <Stack className="cards-frame">
             {/* list bo'sh emas → kartalar | bo'sh → "no-data" xabari */}
             {popularDishes.length !== 0 ? (
-              popularDishes.map((ele: Product) => {
-                const imagePath = `${serverApi}/${ele.productImages[0]}`;
+              popularDishes.map((product: Product) => {
+                const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   // CssVarsProvider — har bir Joy UI karta uchun tema beradi
-                  <CssVarsProvider key={ele._id}>
+                  <CssVarsProvider key={product._id}>
                     <Card className={'card'}>
                       {/* CardCover — rasm kartani to'liq qoplaydi */}
                       <CardCover>
@@ -79,7 +79,7 @@ export default function PopularDishes() {
                             }}
                             noWrap
                           >
-                            {ele.productName}
+                            {product.productName}
                           </Typography>
 
                           {/* Ko'rishlar soni + ko'z ikonkasi */}
@@ -91,7 +91,7 @@ export default function PopularDishes() {
                               display: 'flex',
                             }}
                           >
-                            {ele.productViews}
+                            {product.productViews}
                             <VisibilityIcon
                               sx={{ fontSize: 25, marginLeft: '5px' }}
                             />
@@ -123,7 +123,7 @@ export default function PopularDishes() {
                           }}
                           noWrap
                         >
-                          {ele.productDesc}
+                          {product.productDesc}
                         </Typography>
                       </CardOverflow>
                     </Card>

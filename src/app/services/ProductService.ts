@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { serverApi } from '../../lib/config';
-import { ProductInquery } from '../../lib/types/product';
+import { Product, ProductInquery } from '../../lib/types/product';
 import { Input } from '@mui/material';
 
 class ProductService {
