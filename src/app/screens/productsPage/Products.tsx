@@ -51,34 +51,29 @@ export default function Products() {
   }, [productSearch]);
 
   useEffect(() => {
-    if (searchText === ' ') {
-      productSearch.search = '';
-      setProductSearch({ ...productSearch });
+    if (searchText === '') {
+      setProductSearch((prev) =>
+        prev.search !== '' ? { ...prev, search: '' } : prev
+      );
     }
   }, [searchText]);
 
   /**HANDLERS  */
 
   const searchCollectionHandler = (collection: ProductCollection) => {
-    productSearch.page = 1;
-    productSearch.productCollection = collection;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({ ...prev, page: 1, productCollection: collection }));
   };
 
   const searchOrderHandler = (order: string) => {
-    productSearch.page = 1;
-    productSearch.order = order;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({ ...prev, page: 1, order: order }));
   };
 
   const searchProductHandler = () => {
-    productSearch.search = searchText;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({ ...prev, search: searchText }));
   };
 
   const paginationHandler = (e: ChangeEvent<any>, value: number) => {
-    productSearch.page = value;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({ ...prev, page: value }));
   };
 
   const chooseDishHandler = (id: string) => {
