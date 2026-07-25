@@ -5,6 +5,7 @@ import {
 } from '../enums/product.enum';
 
 export interface Product {
+  [x: string]: any;
   _id: string;
   productStatus: ProductStatus;
   productCollection: ProductCollection;
@@ -21,6 +22,7 @@ export interface Product {
 }
 
 export interface ProductInquery {
+  [x: string]: string | number | ProductCollection | undefined;
   order: string;
   page: number;
   limit: number;

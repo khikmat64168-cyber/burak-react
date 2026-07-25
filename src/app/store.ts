@@ -1,20 +1,14 @@
-import {
-  configureStore,
-  ThunkAction,
-  Action,
-  AnyAction,
-} from '@reduxjs/toolkit';
-import reduxLogger, { logger } from 'redux-logger';
-import HomePage from './screens/homePage';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import reduxLogger from 'redux-logger';
 import HomePageReducor from './screens/homePage/slice';
-import ProductsPage from './screens/productsPage';
+import ProductPageReducer from './screens/productsPage/slice';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(reduxLogger as any),
   reducer: {
     homePage: HomePageReducor,
-    productsPage: ProductsPageReducer,
+    productsPage: ProductPageReducer,
   },
 });
 
@@ -26,6 +20,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-function ProductsPageReducer(state: unknown, action: AnyAction): unknown {
-  throw new Error('Function not implemented.');
-}

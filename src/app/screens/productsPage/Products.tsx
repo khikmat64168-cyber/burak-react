@@ -62,35 +62,30 @@ export default function Products() {
   const searchCollectionHandler = (collection: ProductCollection) => {
     productSearch.page = 1;
     productSearch.productCollection = collection;
+    setProductSearch({ ...productSearch });
+  };
 
-    setProductSearch({
-      ...productSearch /**spread operatoridan foydalanib yangi object yasash  */,
-    });
+  const searchOrderHandler = (order: string) => {
+    productSearch.page = 1;
+    productSearch.order = order;
+    setProductSearch({ ...productSearch });
+  };
 
-    const searchOrderHandler = (order: string) => {
-      productSearch.page = 1;
-      productSearch.order = order;
+  const searchProductHandler = () => {
+    productSearch.search = searchText;
+    setProductSearch({ ...productSearch });
+  };
 
-      setProductSearch({
-        ...productSearch,
-      });
-    };
+  const paginationHandler = (e: ChangeEvent<any>, value: number) => {
+    productSearch.page = value;
+    setProductSearch({ ...productSearch });
+  };
 
-    const searchProductHandler = () => {
-      productSearch.search = searchText;
-      setProductSearch({ ...productSearch });
-    };
+  const chooseDishHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
 
-    const paginationHandler = (e: ChangeEvent<any>, value: number) => {
-      productSearch.page = value;
-      setProductSearch = { ...productSearch };
-    };
-
-    const chooseDishHandler = (id: string) => {
-      console.log('productId:', id);
-      history.push('/products/${id}');
-    };
-    return (
+  return (
       <div className={'products'}>
         <Container>
           <Stack flexDirection={'column'} alignItems={'center'}>
@@ -255,7 +250,7 @@ export default function Products() {
                       >
                         <Stack
                           className={'product-img'}
-                          sx={{ backgroundImage: `url(${product.imagePath})` }}
+                          sx={{ backgroundImage: `url(${imagePath})` }}
                         >
                           <div className={'product-sale'}>{sizeVolume}</div>
                           <Button className={'shop-btn'}>
@@ -359,6 +354,5 @@ export default function Products() {
           </Container>
         </div>
       </div>
-    );
-  };
+  );
 }

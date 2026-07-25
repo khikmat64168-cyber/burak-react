@@ -17,13 +17,24 @@ class ProductService {
         url += `&productCollection=${input.productCollection}`;
 
       if (input.search)
-        url += `
-      $search=${input.search}`;
+        url += `&search=${input.search}`;
 
       const result = await axios.get(url);
 
       console.log('getProducts:', result);
 
+      return result.data;
+    } catch (err) {
+      console.log('Error, getProduct:', err);
+      throw err;
+    }
+  }
+
+  public async getProduct(productId: string): Promise<Product> {
+    try {
+      const url = `${this.path}/product/${productId}`;
+      const result = await axios.get(url, { withCredentials: true });
+      console.log('getProduct :', result);
       return result.data;
     } catch (err) {
       console.log('Error, getProduct:', err);
