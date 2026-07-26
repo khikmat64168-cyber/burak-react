@@ -15,5 +15,8 @@ export const retriveChoosenProduct = createSelector(
 
 export const retrieveProducts = createSelector(
   selectProductsPage,
-  (ProductsPage) => ProductsPage.products,
+  (ProductsPage) => {
+    console.log('🔍 STAGE 7: Selector (selector.ts) → retrieveProducts ishga tushdi! Redux store dan products o\'qilyapti:', ProductsPage.products);
+    return ProductsPage.products;
+  },
 );

@@ -12,16 +12,48 @@ import '../css/app.css';
 import '../css/navbar.css';
 import '../css/footer.css';
 import Test1 from './screens/Test1';
+import { CartItem } from '../lib/types/search';
 
 function App() {
   const location = useLocation();
+  const cartJson: string | null = localStorage.getItem('cartData');
+  const currentCart = cartJson ? JSON.parse(cartJson) : [];
+
+  const [cartItem, setCartItem] = useState<CartItem[]>(currentCart);
+
+  /** Handlers */
+
+  const onAdd /**define */ = (input: CartItem) => {
+    const exist: any = cartItem.find(
+      (item: CartItem) => item._id === input._id,
+    );
+    if (exist) {
+      const cartUpdate = cartItem.map((item: CartItem) => {
+        return item._id === input._id
+          ? { ...exist, quantity: exist.quantity + 1 }
+          : item;
+      });
+
+      setCartItem(cartUpdate);
+      localStorage.setItem('cartData', JSON.stringify(cartUpdate));
+    } else {
+      const cartUpdate = [...cartItem, { ...input }];
+
+      setCartItem(cartUpdate);
+      localStorage.setItem('cartData', JSON.stringify(cartUpdate));
+    }
+  };
 
   return (
     <>
-      {location.pathname === '/' ? <HomeNavbar /> : <OtherNavbar />}
+      {location.pathname === '/' ? (
+        <HomeNavbar />
+      ) : (
+        <OtherNavbar {...({ cartItem } as any)} />
+      )}
       <Switch>
         <Route path="/products">
-          <ProductsPage />
+          <ProductsPage onAdd={onAdd} />
         </Route>
         <Route path="/orders">
           <OrdersPage />

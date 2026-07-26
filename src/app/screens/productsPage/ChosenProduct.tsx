@@ -42,7 +42,12 @@ const restaurantRetriever = createSelector(retriveRestaurant, (restaurant) => ({
   restaurant,
 }));
 
-export default function ChosenProduct() {
+interface ChoosenProductProps {
+  onAdd: (item: CartItem) => void;
+}
+
+export default function ChosenProduct(props: ChoosenProductProps) {
+  const { onAdd } = props;
   const { productId } = useParams<{ productId: string }>();
 
   const { setRestaurant, setChosenProducts } = actionDispatch(useDispatch());

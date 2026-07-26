@@ -19,6 +19,7 @@ const ProductPageSlice = createSlice({
     },
 
     setProducts: (state, action) => {
+      console.log('🟣 STAGE 6: Redux Reducer (slice.ts) → setProducts ishga tushdi! Yangi products:', action.payload);
       state.products = action.payload;
     },
   },

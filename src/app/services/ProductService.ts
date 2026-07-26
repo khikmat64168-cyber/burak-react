@@ -19,9 +19,9 @@ class ProductService {
       if (input.search)
         url += `&search=${input.search}`;
 
+      console.log('🔵 STAGE 2: ProductService → Backend ga HTTP so\'rov ketdi:', url);
       const result = await axios.get(url);
-
-      console.log('getProducts:', result);
+      console.log('🟢 STAGE 3: ProductService → Backend javob berdi! result.status:', result.status, '| Kelgan data:', result.data);
 
       return result.data;
     } catch (err) {
