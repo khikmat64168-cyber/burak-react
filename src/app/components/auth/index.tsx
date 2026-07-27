@@ -74,6 +74,29 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
     }
   };
 
+  const handleLoginRequest = async () => {
+    try {
+      console.log('inpuuts:', memberNick, memberPassword, memberPhone);
+      const isFullfill = memberNick !== '' && memberPassword !== '';
+      if (!isFullfill) throw new Error(Messages.error3);
+
+      const loginInput: MemberInput = {
+        memberNick: memberNick,
+        memberPassword: memberPassword,
+        memberPhone: '',
+      };
+
+      const member = new MemberService();
+      const result = await member.signup(loginInput);
+
+      handleLoginClose();
+    } catch (err) {
+      console.log(err);
+      handleLoginClose();
+      sweetErrorHandling(err).then();
+    }
+  };
+
   /** HANDLERS **/
 
   const handleUsername = (e: T) => {
@@ -94,6 +117,8 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const handlePasswordKeyDown = (e: T) => {
     if (e.key === 'Enter' && signupOpen) {
       handleSignupRequest().then();
+    } else if (e.key === 'Enter' && loginOpen) {
+      handleLoginRequest().then();
     }
   };
 
@@ -188,17 +213,21 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 label="username"
                 variant="outlined"
                 sx={{ my: '10px' }}
+                onChange={handleUsername}
               />
               <TextField
                 id={'outlined-basic'}
                 label={'password'}
                 variant={'outlined'}
                 type={'password'}
+                onChange={handleMemberPassword}
+                onKeyDown={handlePasswordKeyDown}
               />
               <Fab
                 sx={{ marginTop: '27px', width: '120px' }}
                 variant={'extended'}
                 color={'primary'}
+                onClick={handleLoginRequest}
               >
                 <LoginIcon sx={{ mr: 1 }} />
                 Login
