@@ -25,6 +25,7 @@ import ProductService from '../../services/ProductService';
 import MemberService from '../../services/MemberService';
 import { serverApi } from '../../../lib/config';
 import { Member } from '../../../lib/types/member';
+import { CartItem } from '../../../lib/types/search';
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setRestaurant: (data: Member) => dispatch(setRestaurant(data)),
@@ -127,7 +128,7 @@ export default function ChosenProduct(props: ChoosenProductProps) {
                 onClick={(e) => {
                   console.log('ButtonPressed');
                   onAdd({
-                    /**call */ _id: chosenProducts._id,
+                    _id: chosenProducts._id,
                     quantity: 1,
                     name: chosenProducts.productName,
                     price: chosenProducts.productPrice,
