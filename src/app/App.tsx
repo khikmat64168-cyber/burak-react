@@ -39,6 +39,8 @@ function App() {
           onRemove={onRemove}
           onDelete={onDelete}
           onDeleteAll={onDeleteAll}
+          setSignupOpen={setSignupOpen}
+          setLoginOpen={setLoginOpen}
         />
       ) : (
         <OtherNavbar
@@ -47,6 +49,8 @@ function App() {
           onRemove={onRemove}
           onDelete={onDelete}
           onDeleteAll={onDeleteAll}
+          setSignupOpen={setSignupOpen}
+          setLoginOpen={setLoginOpen}
         />
       )}
       <Switch>

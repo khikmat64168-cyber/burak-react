@@ -10,9 +10,19 @@ interface OtherNavbarProps {
   onRemove: (item: CartItem) => void;
   onDelete: (item: CartItem) => void;
   onDeleteAll: () => void;
+  setSignupOpen: (isOpen: boolean) => void;
+  setLoginOpen: (isOpen: boolean) => void;
 }
 export default function OtherNavbar(props: OtherNavbarProps) {
-  const { cartItems, onAdd, onDelete, onDeleteAll, onRemove } = props;
+  const {
+    cartItems,
+    onAdd,
+    onDelete,
+    onDeleteAll,
+    onRemove,
+    setLoginOpen,
+    setSignupOpen,
+  } = props;
   const authMember = null;
   const BasketWithCartItems = Basket as ComponentType<{
     cartItems: CartItem[];
@@ -67,7 +77,11 @@ export default function OtherNavbar(props: OtherNavbarProps) {
 
             {!authMember ? (
               <Box>
-                <Button variant="contained" className="login-button">
+                <Button
+                  variant="contained"
+                  className="login-button"
+                  onClick={() => setLoginOpen(true)}
+                >
                   Login
                 </Button>
               </Box>
