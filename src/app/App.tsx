@@ -15,9 +15,16 @@ import Test1 from './screens/Test1';
 import { CartItem } from '../lib/types/search';
 import useBasket from './hooks/useBasket';
 import AuthenticationModal from './components/auth';
+import { T } from '../lib/types/common';
+import { sweetErrorHandling, sweetTopSuccessAlert } from '../lib/sweetAlert';
+import { Message } from '@mui/icons-material';
+import { Messages } from '../lib/config';
+import MemberService from './services/MemberService';
+import { useGlobals } from './hooks/useGlobals';
 
 function App() {
   const location = useLocation();
+  const { setAuthMember } = useGlobals();
 
   /** Handlers */
 
@@ -26,9 +33,29 @@ function App() {
   const [signupOpen, setSignupOpen] = useState<boolean>(false);
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
 
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
   const handleSignupClose = () => setSignupOpen(false);
 
   const handleLoginClose = () => setLoginOpen(false);
+
+  const handleLogoutClick = (e: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleCloseLogout = () => setAnchorEl(null);
+
+  const handleLogoutRequest = async () => {
+    try {
+      const member = new MemberService();
+      await member.logout();
+      await sweetTopSuccessAlert('success', 700);
+      setAuthMember(null);
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(Messages.error1);
+    }
+  };
 
   return (
     <>
@@ -41,6 +68,10 @@ function App() {
           onDeleteAll={onDeleteAll}
           setSignupOpen={setSignupOpen}
           setLoginOpen={setLoginOpen}
+          anchorEl={anchorEl}
+          handleLogoutClick={handleLogoutClick}
+          handleCloseLogout={handleCloseLogout}
+          handleLogoutRequest={handleLogoutRequest}
         />
       ) : (
         <OtherNavbar
@@ -51,6 +82,10 @@ function App() {
           onDeleteAll={onDeleteAll}
           setSignupOpen={setSignupOpen}
           setLoginOpen={setLoginOpen}
+          anchorEl={anchorEl}
+          handleLogoutClick={handleLogoutClick}
+          handleCloseLogout={handleCloseLogout}
+          handleLogoutRequest={handleLogoutRequest}
         />
       )}
       <Switch>
@@ -61,7 +96,7 @@ function App() {
           <OrdersPage />
         </Route>
         <Route path="/member-page">
-          <UserPage />
+          <UserPage /> //hook
         </Route>
         <Route path="/help">
           <HelpPage />
