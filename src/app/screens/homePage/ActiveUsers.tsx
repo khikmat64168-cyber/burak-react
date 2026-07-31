@@ -30,8 +30,9 @@ export default function ActiveUsers() {
             <CssVarsProvider>
               {topUsers.length !== 0 ? (
                 topUsers.map((member: Member) => {
-                  const imagePath = `${serverApi}/${member.memberImage}`;
-                  console.log('AAAAAAAAAAAAAAAAAA:', member.memberImage);
+                  const imagePath = member.memberImage
+                    ? `${serverApi}/${member.memberImage}`
+                    : '/icons/default-user.svg';
                   return (
                     <Card
                       key={member._id}

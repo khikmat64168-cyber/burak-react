@@ -18,6 +18,7 @@ import ProductService from '../../services/ProductService';
 import { ProductCollection } from '../../../lib/enums/product.enum';
 import { serverApi } from '../../../lib/config';
 import { useHistory } from 'react-router-dom';
+import { CartItem } from '../../../lib/types/search';
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setProducts: (data: Product[]) => dispatch(setProducts(data)),
@@ -272,7 +273,9 @@ export default function Products(props: ProductsProps) {
             <Stack className={'product-wrapper'}>
               {products.length !== 0 ? (
                 products.map((product: Product) => {
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
+                  const imagePath = product.productImages?.[0]
+                    ? `${serverApi}/${product.productImages[0]}`
+                    : '/img/default-product.jpg';
                   const sizeVolume =
                     product.productCollection === ProductCollection.DISH
                       ? product.productVolume + 'litre'

@@ -45,7 +45,9 @@ export default function PopularDishes() {
             {/* list bo'sh emas → kartalar | bo'sh → "no-data" xabari */}
             {popularDishes.length !== 0 ? (
               popularDishes.map((product: Product) => {
-                const imagePath = `${serverApi}/${product.productImages[0]}`;
+                const imagePath = product.productImages?.[0]
+                  ? `${serverApi}/${product.productImages[0]}`
+                  : '/img/default-product.jpg';
                 return (
                   // CssVarsProvider — har bir Joy UI karta uchun tema beradi
                   <CssVarsProvider key={product._id}>

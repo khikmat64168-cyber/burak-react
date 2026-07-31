@@ -38,7 +38,9 @@ export default function NewDishes() {
             <CssVarsProvider>
               {newDishes.length !== 0 ? (
                 newDishes.map((product: Product) => {
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
+                  const imagePath = product.productImages?.[0]
+                    ? `${serverApi}/${product.productImages[0]}`
+                    : '/img/default-product.jpg';
 
                   const sizeVolume =
                     product.productCollection === ProductCollection.DRINK

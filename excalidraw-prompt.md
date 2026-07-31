@@ -28,7 +28,7 @@ Place a large box labeled "🌐 BACKEND (localhost:3003)" in the center-right of
 ## FILE BOXES STYLE
 - Each file = rounded rectangle
 - File name as title (bold, top)
-- Show key code snippet inside (monospace font, small)
+- Show key code snippet inside (monospace font, small)a
 - Colors:
   - Service files (ProductService, MemberService): green border
   - Redux files (slice, selector, store): purple border
@@ -43,141 +43,162 @@ Place a large box labeled "🌐 BACKEND (localhost:3003)" in the center-right of
 
 ### store.ts (purple border)
 ```
+
 configureStore({
-  reducer: {
-    homePage: HomePageReducer,
-    productsPage: ProductPageReducer
-  }
+reducer: {
+homePage: HomePageReducer,
+productsPage: ProductPageReducer
+}
 })
+
 ```
 
 ### productsPage/slice.ts (purple border)
 ```
+
 setProducts: (state, action) => {
-  // 🟣 STAGE 6
-  state.products = action.payload
+// 🟣 STAGE 6
+state.products = action.payload
 }
 setChosenProducts: (state, action) => {...}
 setRestaurant: (state, action) => {...}
+
 ```
 
 ### productsPage/selector.ts (purple border)
 ```
+
 selectProductsPage = (state) => state.productsPage
 // 🔍 STAGE 7
 retrieveProducts = createSelector(
-  selectProductsPage,
-  (page) => page.products
+selectProductsPage,
+(page) => page.products
 )
 retriveChoosenProduct = createSelector(...)
 retriveRestaurant = createSelector(...)
+
 ```
 
 ### homePage/slice.ts (purple border)
 ```
+
 setPopularDishes: (state, action) => {
-  state.popularDishes = action.payload
+state.popularDishes = action.payload
 }
 setNewDishes: (state, action) => {...}
 setTopUsers: (state, action) => {...}
+
 ```
 
 ### homePage/selector.ts (purple border)
 ```
+
 retrievePopularDishes = createSelector(...)
 retrieveNewDishes = createSelector(...)
 retrieveTopUsers = createSelector(...)
+
 ```
 
 ### ProductService.ts (green border)
 ```
+
 // 🔵 STAGE 2: so'rov ketdi
 async getProducts(input): Promise<Product[]> {
-  const url = `${serverApi}/product/all?
+const url = `${serverApi}/product/all?
     order=${input.order}&page=${input.page}`
-  const result = await axios.get(url)
-  // 🟢 STAGE 3: javob keldi
-  return result.data
+const result = await axios.get(url)
+// 🟢 STAGE 3: javob keldi
+return result.data
 }
 async getProduct(id): Promise<Product> {
-  axios.get(url, { withCredentials: true })
-  return result.data
+axios.get(url, { withCredentials: true })
+return result.data
 }
+
 ```
 
 ### MemberService.ts (green border)
 ```
+
 async signup(input): Promise<Member> {
-  axios.post('/member/signup', input,
-    { withCredentials: true })
-  localStorage.setItem('memberData', ...)
-  return member
+axios.post('/member/signup', input,
+{ withCredentials: true })
+localStorage.setItem('memberData', ...)
+return member
 }
 async getRestaurant(): Promise<Member> {...}
 async getTopUsers(): Promise<Member[]> {...}
+
 ```
 
 ### Products.tsx (cyan border)
 ```
+
 // 🔍 STAGE 8
 const productsRetriever = createSelector(
-  retrieveProducts, (products) => ({ products })
+retrieveProducts, (products) => ({ products })
 )
 // 🖥️ STAGE 9: render
 export default function Products(props) {
-  const { products } = useSelector(productsRetriever)
-  const { setProducts } = actionDispatch(dispatch)
+const { products } = useSelector(productsRetriever)
+const { setProducts } = actionDispatch(dispatch)
 
-  // 🟢 DIDMOUNT
-  useEffect(() => { return () => WILLUNMOUNT }, [])
+// 🟢 DIDMOUNT
+useEffect(() => { return () => WILLUNMOUNT }, [])
 
-  // 🟡 STAGE 1: useEffect fired
-  useEffect(() => {
-    ProductService.getProducts(productSearch)
-    // 🟢 STAGE 4: data arrived
-    .then(data => {
-      // 🟢 STAGE 5: dispatching
-      setProducts(data)
-    })
-  }, [productSearch])
+// 🟡 STAGE 1: useEffect fired
+useEffect(() => {
+ProductService.getProducts(productSearch)
+// 🟢 STAGE 4: data arrived
+.then(data => {
+// 🟢 STAGE 5: dispatching
+setProducts(data)
+})
+}, [productSearch])
 }
+
 ```
 
 ### ChosenProduct.tsx (cyan border)
 ```
+
 export default function ChosenProduct(props) {
-  const { productId } = useParams()
-  useEffect(() => {
-    ProductService.getProduct(productId)
-      .then(data => setChosenProducts(data))
-    MemberService.getRestaurant()
-      .then(data => setRestaurant(data))
-  }, [])
-  if (!chosenProducts) return null
-  return <Swiper>...</Swiper>
+const { productId } = useParams()
+useEffect(() => {
+ProductService.getProduct(productId)
+.then(data => setChosenProducts(data))
+MemberService.getRestaurant()
+.then(data => setRestaurant(data))
+}, [])
+if (!chosenProducts) return null
+return <Swiper>...</Swiper>
 }
+
 ```
 
 ### homePage/index.tsx (cyan border)
 ```
-export default function HomePage() {
-  const { setPopularDishes,
-          setNewDishes, setTopUsers }
-    = actionDispatch(useDispatch())
 
-  useEffect(() => {
-    ProductService.getProducts({order:'productViews'})
-      .then(data => setPopularDishes(data))
-    ProductService.getProducts({order:'createdAt'})
-      .then(data => setNewDishes(data))
-    MemberService.getTopUsers()
-      .then(data => setTopUsers(data))
-  }, [])
+export default function HomePage() {
+const { setPopularDishes,
+setNewDishes, setTopUsers }
+= actionDispatch(useDispatch())
+
+useEffect(() => {
+ProductService.getProducts({order:'productViews'})
+.then(data => setPopularDishes(data))
+ProductService.getProducts({order:'createdAt'})
+.then(data => setNewDishes(data))
+MemberService.getTopUsers()
+.then(data => setTopUsers(data))
+}, [])
 }
+
 ```
 
 ### productsPage/index.tsx — Router (cyan border, small)
 ```
+
 <Switch>
   <Route path="/products/:productId">
     <ChosenProduct />
@@ -189,6 +210,7 @@ export default function HomePage() {
 ```
 
 ### App.tsx (cyan border)
+
 ```
 const { cartItem, onAdd,
         onRemove, onDelete,
@@ -206,6 +228,7 @@ const [loginOpen, setLoginOpen] = useState(false)
 ```
 
 ### useBasket.ts (orange border)
+
 ```
 const useBasket = () => {
   const cartJson = localStorage.getItem('cartData')
@@ -227,6 +250,7 @@ const useBasket = () => {
 ```
 
 ### Basket.tsx (cyan border)
+
 ```
 BasketProps: {
   cartItems, onAdd, onRemove,
@@ -239,6 +263,7 @@ totalPrice = (itemsPrice + shippingCost).toFixed(1)
 ```
 
 ### HomeNavbar.tsx / OtherNavbar.tsx (cyan border)
+
 ```
 props: {
   cartItems, onAdd, onRemove,
@@ -251,6 +276,7 @@ onClick={() => setSignupOpen(true)}  → Sign Up
 ```
 
 ### auth/index.tsx (yellow border)
+
 ```
 const [memberNick, setMemberNick] = useState('')
 const [memberPhone, setMemberPhone] = useState('')
@@ -426,7 +452,9 @@ Draw these arrows with labels. Each label = "STAGE N: action — purpose":
 ---
 
 ## STAGE NUMBER BADGES
+
 Above each relevant code line in the file boxes, add a small colored circle with the stage number:
+
 - Stage 1: 🟡 yellow badge
 - Stage 2: 🔵 blue badge
 - Stage 3-5: 🟢 green badge
@@ -441,6 +469,7 @@ Above each relevant code line in the file boxes, add a small colored circle with
 ## EXTRA ELEMENTS
 
 Add a legend box (bottom right):
+
 ```
 LEGEND:
 🟣 Redux flow
@@ -455,12 +484,13 @@ LEGEND:
 
 Add title (top center):
 "Burak Restaurant App — Full Data Flow
- React + Redux Toolkit + TypeScript
- (Jul 24-25-27 · Excluding Jul 28)"
+React + Redux Toolkit + TypeScript
+(Jul 24-25-27 · Excluding Jul 28)"
 
 ---
 
 ## STYLE NOTES
+
 - Use hand-drawn style (Excalidraw default)
 - Arrow labels: small font, italic
 - Stage badges: bold, colored circle
@@ -471,8 +501,10 @@ Add title (top center):
   - Basket flow: light orange background
   - Auth flow: light yellow background
   - HomePage flow: light green background
+
 ```
 
 ---
 
 *Bu promptni Claude browser extension → Excalidraw canvas ga paste qiling*
+```

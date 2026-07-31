@@ -115,6 +115,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                     : '/icons/default-user.svg'
                 }
                 aria-haspopup={'true'}
+                onClick={handleLogoutClick}
               />
             )}
             <Menu
