@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { serverApi } from '../../lib/config';
-import { Order, OrderInquiry, OrderItemInput } from '../../lib/types/order';
+import {
+  Order,
+  OrderInquiry,
+  OrderItemInput,
+  OrderUpdateInput,
+} from '../../lib/types/order';
 import { CartItem } from '../../lib/types/search';
-import { OrderStatus } from '../../lib/enums/order.enum';
 
 class OrderService {
   private readonly path: string;
@@ -35,25 +39,27 @@ class OrderService {
 
   public async getMyOrders(input: OrderInquiry): Promise<Order[]> {
     try {
-      //axios withCredentials = true
-      axios.defaults.withCredentials = true;
-      const url = `${this.path}/ order / all`;
-      const query = `?page =${input.page}&limit=${input.limit}&orderStatus=${OrderStatus}`;
+      const url = `${this.path}/order/all`;
+      const query = `?page=${input.page}&limit=${input.limit}&orderStatus=${input.orderStatus}`;
       const result = await axios.get(url + query, { withCredentials: true });
 
-      console.log('getMuOrders:', result);
+      console.log('getMyOrders result.data:', result.data);
 
-      return result.data;
+      const data = result.data;
+      return Array.isArray(data) ? data : (data?.list ?? data?.data ?? []);
     } catch (err) {
-      console.log(' Error, getMyOrders:', err);
+      console.log('Error, getMyOrders:', err);
       throw err;
     }
   }
 
   public async updateOrder(input: OrderUpdateInput): Promise<Order> {
     try {
-      const url = `${this.path}  + '/order/update'`;
+      const url = `${this.path}/order/update`;
       const result = await axios.post(url, input, { withCredentials: true });
+      console.log('updateOrder:', result);
+
+      return result.data as Order;
     } catch (err) {
       console.log(' Error, getMyOrders:', err);
       throw err;

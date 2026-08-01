@@ -62,7 +62,7 @@ export default function Basket(props: BasketProps) {
       history.push('/orders');
     } catch (err) {
       console.log(err);
-      sweetErrorHandling(err).then;
+      sweetErrorHandling(err).then();
     }
   };
 
