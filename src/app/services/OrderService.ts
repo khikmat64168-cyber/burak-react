@@ -26,6 +26,7 @@ class OrderService {
         withCredentials: true,
       });
       console.log('createOrder :', result);
+      return result.data as Order;
     } catch (err) {
       console.log(err);
       throw err;
@@ -34,16 +35,17 @@ class OrderService {
 
   public async getMyOrders(input: OrderInquiry): Promise<Order[]> {
     try {
+      //axios withCredentials = true 
       axios.defaults.withCredentials = true;
       const url = `${this.path}/ order / all`;
-      const query = `?page =${input.page}&limit=${input.limit}&orderStatus=${orderStatus}`;
+      const query = `?page =${input.page}&limit=${input.limit}&orderStatus=${OrderStatus}`;
       const result = await axios.get.(url+query , { withCredentials: true });
 
       console.log("getMuOrders:", result );
        
-      return result.data 
+      return result.data  
     } catch (err) {
-      console.log(err);
+      console.log(" Error, getMyOrders:", err );
       throw err;
     }
   }
