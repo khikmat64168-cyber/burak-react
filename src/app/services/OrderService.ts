@@ -35,17 +35,27 @@ class OrderService {
 
   public async getMyOrders(input: OrderInquiry): Promise<Order[]> {
     try {
-      //axios withCredentials = true 
+      //axios withCredentials = true
       axios.defaults.withCredentials = true;
       const url = `${this.path}/ order / all`;
       const query = `?page =${input.page}&limit=${input.limit}&orderStatus=${OrderStatus}`;
-      const result = await axios.get.(url+query , { withCredentials: true });
+      const result = await axios.get(url + query, { withCredentials: true });
 
-      console.log("getMuOrders:", result );
-       
-      return result.data  
+      console.log('getMuOrders:', result);
+
+      return result.data;
     } catch (err) {
-      console.log(" Error, getMyOrders:", err );
+      console.log(' Error, getMyOrders:', err);
+      throw err;
+    }
+  }
+
+  public async updateOrder(input: OrderUpdateInput): Promise<Order> {
+    try {
+      const url = `${this.path}  + '/order/update'`;
+      const result = await axios.post(url, input, { withCredentials: true });
+    } catch (err) {
+      console.log(' Error, getMyOrders:', err);
       throw err;
     }
   }

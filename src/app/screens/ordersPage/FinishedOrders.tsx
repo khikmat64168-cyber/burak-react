@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Stack } from '@mui/material';
 import TabPanel from '@mui/lab/TabPanel';
 
-import { retrieveFinishedOrders } from './selector';
+import { retrieveFinishedOrderss } from './selector';
 import { Product } from '../../../lib/types/product';
 import { ProductCollection } from '../../../lib/enums/product.enum';
 import { serverApi } from '../../../lib/config';
@@ -11,7 +11,7 @@ import { createSelector } from 'reselect';
 import { useSelector } from 'react-redux';
 
 const finishedOrdersRetriever = createSelector(
-  retrieveFinishedOrders,
+  retrieveFinishedOrderss,
   (finishedOrders) => ({ finishedOrders }),
 );
 

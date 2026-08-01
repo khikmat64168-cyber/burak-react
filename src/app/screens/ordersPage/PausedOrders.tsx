@@ -9,15 +9,76 @@ import { createSelector } from 'reselect';
 import { retrievePauseOrders } from './selector';
 import { Product } from '../../../lib/types/product';
 import { ProductCollection } from '../../../lib/enums/product.enum';
-import { serverApi } from '../../../lib/config';
-import { Order, OrderItem } from '../../../lib/types/order';
+import { Messages, serverApi } from '../../../lib/config';
+import { Order, OrderItem, OrderUpdateInput } from '../../../lib/types/order';
+import { T } from '../../../lib/types/common';
+import { OrderStatus } from '../../../lib/enums/order.enum';
+import { useGlobals } from '../../hooks/useGlobals';
+import { sweetErrorHandling } from '../../../lib/sweetAlert';
+import OrderService from '../../services/OrderService';
 
 const pauseOrdersRetriever = createSelector(
   retrievePauseOrders,
   (pauseOrders) => ({ pauseOrders }),
 );
-export default function PausedOrders() {
+
+interface PausedOrdersProps {
+  setValues: (input: string) => void;
+}
+export default function PausedOrders(props: PausedOrdersProps) {
+  const { setValues } = props;
+  const { authMember, setOrderBuilder } = useGlobals();
   const { pauseOrders } = useSelector(pauseOrdersRetriever);
+
+  const deleteOrderHandler = async (e: T) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+      const orderId = e.target.value;
+      const input: OrderUpdateInput = {
+        orderId: orderId,
+        orderStatus: OrderStatus.DELETE,
+      };
+      const order = new OrderService();
+      await order.updateOrder(input);
+      /** Order rebuild  */
+      setOrderBuilder(new Date());
+
+      const confirmation = window.confirm('Do you want to delete this order? ');
+      if (confirmation) {
+      }
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
+  const processOrderHandler = async (e: T) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+
+      /**Payment process  */
+      const orderId = e.target.value;
+      const input: OrderUpdateInput = {
+        orderId: orderId,
+        orderStatus: OrderStatus.PROCESS,
+      };
+      const order = new OrderService();
+      await order.updateOrder(input);
+      /** Order rebuild  */
+      setValues('2');
+      setOrderBuilder(new Date());
+
+      const confirmation = window.confirm(
+        'Do you want to process this order? ',
+      );
+      if (confirmation) {
+      }
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
   return (
     <TabPanel value={'1'}>
       <Stack>
@@ -63,13 +124,20 @@ export default function PausedOrders() {
                   <p>${order.orderTotal} </p>
                 </Box>
                 <Button
+                  value={order._id}
                   variant="contained"
                   color="secondary"
                   className={'cancel-button'}
+                  onClick={deleteOrderHandler}
                 >
                   Cancel
                 </Button>
-                <Button variant="contained" className={'pay-button'}>
+                <Button
+                  value={order._id}
+                  variant="contained"
+                  className={'pay-button'}
+                  onClick={processOrderHandler}
+                >
                   Payment
                 </Button>
               </Box>
@@ -93,4 +161,7 @@ export default function PausedOrders() {
       </Stack>
     </TabPanel>
   );
+}
+function sweetErrorHandler(err: unknown) {
+  throw new Error('Function not implemented.');
 }

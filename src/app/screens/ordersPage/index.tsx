@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from '@reduxjs/toolkit';
 import { OrderStatus } from '../../../lib/enums/order.enum';
 import OrderService from '../../services/OrderService';
+import { useGlobals } from '../../hooks/useGlobals';
+import { serverApi } from '../../../lib/config';
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setPauseOrders: (data: Order[]) => dispatch(setPauseOrders(data)),
@@ -25,6 +27,7 @@ export default function OrdersPage() {
   const { setFinishedOrders, setPauseOrders, setProcessOrders } =
     actionDispatch(useDispatch());
   const [value, setValue] = useState('3');
+  const { authMember, orderBuilder } = useGlobals();
 
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     limit: 5,
@@ -48,7 +51,7 @@ export default function OrdersPage() {
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
       .then((data) => setFinishedOrders(data))
       .catch((err) => console.log(err));
-  }, [orderInquiry]);
+  }, [orderInquiry, orderBuilder]);
 
   /** HANDLERS */
 
@@ -76,8 +79,12 @@ export default function OrdersPage() {
               </Box>
             </Box>
             <Stack className={'order-main-content'}>
-              <PausedOrders />
-              <ProcessOrders />
+              <PausedOrders setValues={setValue} />
+              <ProcessOrders
+                setValues={function (value: string): void {
+                  throw new Error('Function not implemented.');
+                }}
+              />
               <FinishedOrders />
             </Stack>
           </TabContext>
@@ -88,7 +95,11 @@ export default function OrdersPage() {
             <Box className={'member-box'}>
               <div className={'order-user-img'}>
                 <img
-                  src={'/icons/default-user.svg'}
+                  src={
+                    authMember?.memberImage
+                      ? `${serverApi}/${authMember.memberImage}`
+                      : '/icons/default-user.svg'
+                  }
                   className={'order-user-avatar'}
                   alt="user avatar"
                 />
@@ -100,8 +111,12 @@ export default function OrdersPage() {
                   />
                 </div>
               </div>
-              <span className={'order-user-name'}>Martin</span>
-              <span className={'order-user-prof'}>User</span>
+              <span className={'order-user-name'}>
+                {authMember?.memberNick ?? 'Guest'}
+              </span>
+              <span className={'order-user-prof'}>
+                {authMember?.memberType ?? 'User'}
+              </span>
             </Box>
             <Box className={'liner'}></Box>
             <Box className={'order-user-address'}>
