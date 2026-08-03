@@ -16,6 +16,8 @@ import { OrderStatus } from '../../../lib/enums/order.enum';
 import OrderService from '../../services/OrderService';
 import { useGlobals } from '../../hooks/useGlobals';
 import { serverApi } from '../../../lib/config';
+import { useHistory } from 'react-router-dom';
+import { MemberType } from '../../../lib/enums/member.enum';
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setPauseOrders: (data: Order[]) => dispatch(setPauseOrders(data)),
@@ -28,7 +30,8 @@ export default function OrdersPage() {
     actionDispatch(useDispatch());
   const [value, setValue] = useState('3');
   const { authMember, orderBuilder } = useGlobals();
-
+  const history = useHistory();
+  const memberType = MemberType;
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     limit: 5,
     page: 1,
@@ -58,6 +61,8 @@ export default function OrdersPage() {
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  if (!authMember) history.push('/');
 
   return (
     <div className={'order-page'}>
@@ -105,17 +110,18 @@ export default function OrdersPage() {
                 />
                 <div className={'order-user-icon-box'}>
                   <img
-                    src={'/icons/user-badge.svg'}
+                    src={
+                      authMember?memberType === MemberType.RESTAURANT ? "/icon/restaurant.svg":'/icons/user-badge.svg'}
                     className={'order-user-prof-img'}
                     alt="user badge"
                   />
                 </div>
               </div>
               <span className={'order-user-name'}>
-                {authMember?.memberNick ?? 'Guest'}
+                {authMember?.memberNick}
               </span>
               <span className={'order-user-prof'}>
-                {authMember?.memberType ?? 'User'}
+                {authMember?.memberType}
               </span>
             </Box>
             <Box className={'liner'}></Box>
@@ -123,7 +129,7 @@ export default function OrdersPage() {
               <div style={{ display: 'flex' }}>
                 <LocationOnIcon />
               </div>
-              <div className={'spec-address-txt'}>Do not exist</div>
+              <div className={'spec-address-txt'}>{authMember?.memberAddress ? authMember.memberAddress : "Do not exist"}</div>
             </Box>
           </Box>
           <Box className={'order-info-box'} sx={{ mt: '15px' }}>

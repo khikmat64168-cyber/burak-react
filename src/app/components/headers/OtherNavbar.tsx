@@ -36,7 +36,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
     onDeleteAll,
     onRemove,
     setLoginOpen,
-    setSignupOpen,
+    setSignupOpen, // errooor
     handleLogoutClick,
     anchorEl,
     handleCloseLogout,

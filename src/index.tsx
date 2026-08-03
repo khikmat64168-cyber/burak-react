@@ -21,8 +21,6 @@ root.render(
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Router>
-            {' '}
-            // children
             <App />
           </Router>
         </ThemeProvider>
