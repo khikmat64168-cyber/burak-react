@@ -31,7 +31,6 @@ export default function OrdersPage() {
   const [value, setValue] = useState('3');
   const { authMember, orderBuilder } = useGlobals();
   const history = useHistory();
-  const memberType = MemberType;
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     limit: 5,
     page: 1,
@@ -111,7 +110,10 @@ export default function OrdersPage() {
                 <div className={'order-user-icon-box'}>
                   <img
                     src={
-                      authMember?memberType === MemberType.RESTAURANT ? "/icon/restaurant.svg":'/icons/user-badge.svg'}
+                      authMember?.memberType === MemberType.RESTAURANT
+                        ? '/icon/restaurant.svg'
+                        : '/icons/user-badge.svg'
+                    }
                     className={'order-user-prof-img'}
                     alt="user badge"
                   />
@@ -129,7 +131,11 @@ export default function OrdersPage() {
               <div style={{ display: 'flex' }}>
                 <LocationOnIcon />
               </div>
-              <div className={'spec-address-txt'}>{authMember?.memberAddress ? authMember.memberAddress : "Do not exist"}</div>
+              <div className={'spec-address-txt'}>
+                {authMember?.memberAddress
+                  ? authMember.memberAddress
+                  : 'Do not exist'}
+              </div>
             </Box>
           </Box>
           <Box className={'order-info-box'} sx={{ mt: '15px' }}>
